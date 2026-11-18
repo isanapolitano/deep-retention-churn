@@ -1,10 +1,10 @@
-# 🏦 Deep Retention: Sistema de Retención Selectiva de Clientes
+# Deep Retention: Sistema de Retención Selectiva de Clientes
 
 Deep Retention es un sistema que estima, con una **red neuronal (Perceptrón Multicapa)**, la probabilidad de que un cliente abandone el banco. Con ese dato, un **motor financiero** decide si conviene invertir en retenerlo. El incentivo solo se autoriza cuando el cliente representa una ganancia neta positiva después de descontar el costo del beneficio.
 
-📄 **[Informe Ejecutivo (PDF)](reports/Informe_Ejecutivo_Deep_Retention.pdf)**
+**[Informe Ejecutivo (PDF)](reports/Informe_Ejecutivo_Deep_Retention.pdf)**
 
-🌐 **Aplicación en línea:** _[pendiente: enlace de Streamlit Community Cloud]_
+**Aplicación en línea:** _[pendiente: enlace de Streamlit Community Cloud]_
 
 ---
 
