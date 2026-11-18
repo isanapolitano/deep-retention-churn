@@ -4,7 +4,7 @@ Deep Retention es un sistema que estima, con una **red neuronal (Perceptrón Mul
 
 **[Informe Ejecutivo (PDF)](reports/Informe_Ejecutivo_Deep_Retention.pdf)**
 
-**Aplicación en línea:** _[pendiente: enlace de Streamlit Community Cloud]_
+**Aplicación en línea:** [deep-retention-churn.streamlit.app](https://deep-retention-churn.streamlit.app/)
 
 ---
 
@@ -97,7 +97,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-**1. Abrir la aplicación** (los modelos ya vienen entrenados en `/models`):
+**1. Abrir la aplicación en local** (los modelos ya vienen entrenados en `/models`; también se puede usar directamente en [deep-retention-churn.streamlit.app](https://deep-retention-churn.streamlit.app/)):
 
 ```bash
 streamlit run app/streamlit_app.py
