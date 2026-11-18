@@ -1,0 +1,99 @@
+{
+  "fecha_entrenamiento": "2026-11-18T13:11:17",
+  "versiones": {
+    "python": "3.13.18",
+    "tensorflow": "2.21.0",
+    "scikit-learn": "1.9.1",
+    "shap": "0.54.1"
+  },
+  "datos": {
+    "registros": 10000,
+    "train": 7000,
+    "val": 1500,
+    "test": 1500,
+    "tasa_fuga": 0.2038
+  },
+  "variables": [
+    "CreditScore",
+    "Age",
+    "Tenure",
+    "Balance",
+    "NumOfProducts",
+    "EstimatedSalary",
+    "Satisfaction Score",
+    "Point Earned",
+    "HasCrCard",
+    "IsActiveMember",
+    "Geography",
+    "Gender",
+    "Card Type"
+  ],
+  "variables_excluidas": {
+    "identificadores": [
+      "RowNumber",
+      "CustomerId",
+      "Surname"
+    ],
+    "fuga_de_datos": [
+      "Complain"
+    ]
+  },
+  "fuga_de_datos": {
+    "coincidencia_complain_exited": 0.9986,
+    "roc_auc_logistica_con_complain": 0.9990365772216201
+  },
+  "hiperparametros": {
+    "test_size": 0.15,
+    "val_size": 0.15,
+    "batch_size": 64,
+    "epochs": 300,
+    "learning_rate": 0.001,
+    "patience": 15,
+    "units_1": 128,
+    "units_2": 64,
+    "dropout_1": 0.3,
+    "dropout_2": 0.2,
+    "l2": 0.0001
+  },
+  "class_weight": {
+    "0": 0.6279153211338356,
+    "1": 2.4544179523141656
+  },
+  "epocas_entrenadas": 45,
+  "mejor_epoca": 30,
+  "calibrador": {
+    "a": 0.8877190351486206,
+    "b": -1.1449294090270996
+  },
+  "metricas_prueba": {
+    "roc_auc": 0.8537130094919041,
+    "pr_auc": 0.6804751319104037,
+    "brier_sin_calibrar": 0.14272108674049377,
+    "brier_calibrado": 0.10623247536955606,
+    "ece_sin_calibrar": 0.15784136193494003,
+    "ece_calibrado": 0.01791938407810244,
+    "prob_media_predicha": 0.21733118705468069,
+    "tasa_fuga_real": 0.204,
+    "recall_umbral_05": 0.7287581699346405,
+    "precision_umbral_05": 0.5056689342403629,
+    "baseline_logistica_roc_auc": 0.7639012053732716,
+    "baseline_logistica_pr_auc": 0.43919929294081994,
+    "train_roc_auc": 0.909281647762528
+  },
+  "kpis_cartera_supuestos_base": {
+    "clientes": 10000,
+    "clientes_riesgo_critico": 832,
+    "capital_riesgo_critico": 69477890.28999999,
+    "clientes_intervenidos": 1668,
+    "capital_intervenido": 201020497.07,
+    "saldo_rescatado_esperado": 38745113.545876086,
+    "clientes_retenidos_esperados": 309.7261181235141,
+    "fugas_esperadas_intervenidos": 972.3004999370598,
+    "inversion": 471110.0,
+    "margen_protegido": 1632839.397715734,
+    "ganancia_neta": 1161729.397715734,
+    "roi": 2.4659408582193842,
+    "salida_permitida": 590
+  },
+  "parametros_capas": 11393
+}

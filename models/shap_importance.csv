@@ -1,0 +1,14 @@
+variable,mean_abs_shap,etiqueta,direccion
+NumOfProducts,0.10255874702707292,Número de productos,mayor riesgo: 4
+Age,0.08607044915516263,Edad,↑ valor → ↑ riesgo
+IsActiveMember,0.05233989660756715,Cliente activo,mayor riesgo: 0
+Geography,0.029769377512687007,País,mayor riesgo: Germany
+Gender,0.0247417858561524,Género,mayor riesgo: Female
+Balance,0.02447061274790152,Saldo,↑ valor → ↓ riesgo
+Card Type,0.010475504077449644,Tipo de tarjeta,mayor riesgo: DIAMOND
+Point Earned,0.009936354302455194,Puntos acumulados,↑ valor → ↓ riesgo
+CreditScore,0.008476575174540478,Puntaje crediticio,↑ valor → ↓ riesgo
+Satisfaction Score,0.00804107119850806,Satisfacción,mayor riesgo: 3
+EstimatedSalary,0.0076281259986617275,Salario estimado,↑ valor → ↑ riesgo
+Tenure,0.006554063692949543,Antigüedad (años),↑ valor → ↓ riesgo
+HasCrCard,0.006520316175177217,Tiene tarjeta de crédito,mayor riesgo: 1
