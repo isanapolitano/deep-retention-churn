@@ -31,7 +31,7 @@ from src.financial import (  # noqa: E402
 )
 from src.inference import ChurnPredictor  # noqa: E402
 
-st.set_page_config(page_title="Deep Retention", page_icon="🏦", layout="wide")
+st.set_page_config(page_title="Deep Retention", layout="wide")
 
 BLUE, ORANGE, AQUA, YELLOW = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
 GOOD, WARNING, SERIOUS, CRITICAL, GRAY = "#0ca30c", "#fab219", "#ec835a", "#d03b3b", "#8a8984"
@@ -42,10 +42,10 @@ SEGMENT_COLORS = {
     "D: Estable": GRAY,
 }
 DECISION_STYLE = {
-    "Retención Prioritaria": ("✅", GOOD),
-    "Retención Automatizada": ("✅", GOOD),
-    "Salida Permitida": ("⛔", CRITICAL),
-    "Sin Acción Requerida": ("ℹ️", GRAY),
+    "Retención Prioritaria": GOOD,
+    "Retención Automatizada": GOOD,
+    "Salida Permitida": CRITICAL,
+    "Sin Acción Requerida": GRAY,
 }
 
 
@@ -145,21 +145,21 @@ kpis = portfolio_kpis(scored)
 meta = get_metadata()
 
 # ------------------------------------------------------------------ encabezado
-st.title("🏦 Deep Retention")
+st.title("Deep Retention")
 st.caption(
     "Sistema de retención selectiva de clientes. La red neuronal estima la probabilidad de fuga "
     "y el motor financiero solo autoriza un incentivo cuando la **ganancia neta esperada es "
     "mayor a cero**."
 )
 if params.to_dict() != DEFAULTS.to_dict():
-    st.info("Se están usando supuestos modificados en el **Simulador de Parámetros**.", icon="🧮")
+    st.info("Se están usando supuestos modificados en el **Simulador de Parámetros**.")
 
 tab_client, tab_portfolio, tab_sim, tab_batch, tab_model = st.tabs([
-    "🔎 Buscador por Cliente",
-    "📊 Panel de Cartera",
-    "🧮 Simulador de Parámetros",
-    "📁 Evaluación por Lote",
-    "🧠 Modelo y Explicabilidad",
+    "Buscador por Cliente",
+    "Panel de Cartera",
+    "Simulador de Parámetros",
+    "Evaluación por Lote",
+    "Modelo y Explicabilidad",
 ])
 
 
@@ -198,13 +198,13 @@ def client_form() -> pd.DataFrame | None:
 
 def show_client(row_df: pd.DataFrame, proba: float) -> None:
     res = evaluate_portfolio(row_df, np.array([proba]), params).iloc[0]
-    icon, color = DECISION_STYLE[res["decision"]]
+    color = DECISION_STYLE[res["decision"]]
 
     st.markdown(
         f"<div style='padding:14px 18px;border-radius:10px;border-left:6px solid {color};"
         f"background:rgba(127,127,127,0.08);margin-bottom:12px'>"
         f"<div style='font-size:0.85rem;opacity:0.75'>Decisión comercial sugerida</div>"
-        f"<div style='font-size:1.5rem;font-weight:700'>{icon} {res['decision']}</div>"
+        f"<div style='font-size:1.5rem;font-weight:700'>{res['decision']}</div>"
         f"<div style='opacity:0.85'>{res['segmento']} · Incentivo: <b>{res['incentivo']}</b></div>"
         "</div>",
         unsafe_allow_html=True,
@@ -233,7 +233,7 @@ def show_client(row_df: pd.DataFrame, proba: float) -> None:
             "Fórmula": f"({proba:.2f} × {inc.effectiveness:.2f} × {money(res['margen_cliente'])})"
                        f" − {money(inc.cost)}",
             "Ganancia neta esperada": money(eng) if elig[inc.key] else "—",
-            "Resultado": ("✔ Elegido" if res["incentivo"] == inc.name else
+            "Resultado": ("Elegido" if res["incentivo"] == inc.name else
                           ("Rentable" if elig[inc.key] and eng > 0 else "No rentable")
                           if elig[inc.key] else "No aplica al perfil"),
         })
@@ -245,7 +245,7 @@ def show_client(row_df: pd.DataFrame, proba: float) -> None:
         st.caption("El cliente es deficitario (margen ≤ 0): ningún incentivo puede generar ganancia, "
                    "por lo que se cataloga como **Salida Permitida** y se bloquea el gasto.")
 
-    with st.expander("🧠 ¿Por qué la red asignó este puntaje? (SHAP)"):
+    with st.expander("¿Por qué la red asignó este puntaje? (SHAP)"):
         if st.button("Calcular explicación", key=f"shap_{row_df['CustomerId'].iloc[0]}"):
             with st.spinner("Calculando contribuciones..."):
                 sv = predictor.explain(row_df, n_permutations=8)
@@ -413,7 +413,7 @@ with tab_portfolio:
             "segmento": "Segmento",
         },
     )
-    st.download_button("⬇️ Descargar lista completa (CSV)", work.to_csv(index=False).encode("utf-8"),
+    st.download_button("Descargar lista completa (CSV)", work.to_csv(index=False).encode("utf-8"),
                        "clientes_a_intervenir.csv", "text/csv")
 
 
@@ -421,7 +421,7 @@ with tab_portfolio:
 with tab_sim:
     st.markdown("Ajuste los supuestos y observe el impacto en la rentabilidad neta de la campaña. "
                 "Los cambios se aplican a toda la aplicación.")
-    st.button("↺ Restablecer valores por defecto", on_click=reset_params)
+    st.button("Restablecer valores por defecto", on_click=reset_params)
 
     s1, s2, s3 = st.columns(3)
     with s1:
@@ -517,7 +517,7 @@ with tab_batch:
         + ". Las columnas `CustomerId` y `Surname` son opcionales."
     )
     template = portfolio_raw[["CustomerId", "Surname"] + config.FEATURES].head(5)
-    st.download_button("⬇️ Descargar plantilla de ejemplo", template.to_csv(index=False).encode("utf-8"),
+    st.download_button("Descargar plantilla de ejemplo", template.to_csv(index=False).encode("utf-8"),
                        "plantilla_clientes.csv", "text/csv")
     up = st.file_uploader("Archivo CSV", type="csv")
     if up is not None:
@@ -538,7 +538,7 @@ with tab_batch:
             st.dataframe(res[["CustomerId", "Surname", "prob_fuga", "margen_cliente", "decision",
                               "incentivo", "costo_incentivo", "ganancia_neta_esperada"]],
                          hide_index=True, width="stretch")
-            st.download_button("⬇️ Descargar resultados", res.to_csv(index=False).encode("utf-8"),
+            st.download_button("Descargar resultados", res.to_csv(index=False).encode("utf-8"),
                                "resultados_deep_retention.csv", "text/csv")
         except ValueError as e:
             st.error(f"No se pudo procesar el archivo: {e}")
@@ -572,7 +572,7 @@ with tab_model:
             f"{pct(meta['fuga_de_datos']['coincidencia_complain_exited'], 2)} de los casos. "
             f"Con ella, incluso una regresión logística alcanza un ROC-AUC de "
             f"{meta['fuga_de_datos']['roc_auc_logistica_con_complain']:.3f}, un resultado irreal. "
-            "Por eso se excluyó del modelo.", icon="⚠️")
+            "Por eso se excluyó del modelo.")
     figs = config.FIGURES_DIR
     c1, c2 = st.columns(2)
     for col, name, cap in [
