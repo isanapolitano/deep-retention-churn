@@ -48,6 +48,7 @@ from src.plots import GRID, SERIES, TEXT_2, apply_style
 AUTORES = ["Isabella Napolitano", "Manuela Matos"]
 CURSO = "Inteligencia Artificial y Aprendizaje Automático"
 REPO_URL = "github.com/isanapolitano/deep-retention-churn"
+APP_URL = "https://deep-retention-churn.streamlit.app/"
 
 OUTPUT = config.REPORTS_DIR / "Informe_Ejecutivo_Deep_Retention.pdf"
 
@@ -267,6 +268,7 @@ def build() -> Path:
         ["Materia:", CURSO],
         ["Fecha:", date.today().strftime("%d/%m/%Y")],
         ["Repositorio:", REPO_URL],
+        ["Aplicación:", f"<link href='{APP_URL}' color='#2a78d6'>{APP_URL.removeprefix('https://').rstrip('/')}</link>"],
     ]
     story.append(table(cover, [3.2 * cm, 13.6 * cm], header=False, zebra=False, bold_first=True))
     story.append(Spacer(1, 1.2 * cm))
@@ -511,7 +513,9 @@ def build() -> Path:
     story.append(P(
         "La aplicación se desarrolló en Streamlit y se organiza en cinco módulos: Buscador por "
         "Cliente, Panel de Cartera, Simulador de Parámetros, Evaluación por Lote y Modelo y "
-        "Explicabilidad. No requiere conocimientos técnicos y responde en pocos segundos."))
+        "Explicabilidad. No requiere conocimientos técnicos y responde en pocos segundos. Está "
+        f"disponible en línea en <link href='{APP_URL}' color='#2a78d6'>{APP_URL}</link>, sin "
+        "necesidad de instalar nada."))
     story.append(P("Procedimiento del gestor de cuentas", "h2"))
     steps = [
         "<b>Preparar la jornada.</b> En el Panel de Cartera, filtrar por país o segmento y descargar la "
